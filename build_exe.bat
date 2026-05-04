@@ -6,32 +6,39 @@ echo BUILD VIDEO DOWNLOADER STREAMLIT EXE
 echo ========================================
 echo.
 
-echo [1/6] Creare venv...
+echo [1/7] Stergere build vechi...
+rmdir /s /q build 2>nul
+rmdir /s /q dist 2>nul
+del /q VideoDownloader.spec 2>nul
+
+echo.
+echo [2/7] Creare venv...
 python -m venv venv
 
 echo.
-echo [2/6] Activare venv...
+echo [3/7] Activare venv...
 call venv\Scripts\activate.bat
 
 echo.
-echo [3/6] Upgrade pip...
+echo [4/7] Upgrade pip...
 python -m pip install --upgrade pip
 
 echo.
-echo [4/6] Instalare dependinte...
+echo [5/7] Instalare dependinte...
 pip install -r requirements.txt
 
 echo.
-echo [5/6] Instalare Chromium Playwright in pachet local...
+echo [6/7] Instalare Chromium Playwright local...
 set PLAYWRIGHT_BROWSERS_PATH=0
 python -m playwright install chromium
 
 echo.
-echo [6/6] Build EXE cu PyInstaller...
+echo [7/7] Build EXE cu PyInstaller...
 pyinstaller ^
   --noconfirm ^
   --clean ^
   --onedir ^
+  --console ^
   --name VideoDownloader ^
   --collect-all streamlit ^
   --collect-all playwright ^
@@ -41,7 +48,7 @@ pyinstaller ^
 echo.
 echo ========================================
 echo BUILD TERMINAT
-echo Aplicatia este in folderul:
+echo Aplicatia este in:
 echo dist\VideoDownloader
 echo ========================================
 pause
