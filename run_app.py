@@ -24,7 +24,6 @@ def resource_path(relative_path):
 BASE_DIR = get_base_dir()
 LOG_FILE = BASE_DIR / "VideoDownloader_error.log"
 
-# Pentru Playwright ambalat local
 os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "0"
 
 
@@ -66,6 +65,7 @@ if __name__ == "__main__":
             "streamlit",
             "run",
             str(app_path),
+            "--global.developmentMode=false",
             "--server.headless=true",
             "--server.port=8501",
             "--browser.gatherUsageStats=false"
